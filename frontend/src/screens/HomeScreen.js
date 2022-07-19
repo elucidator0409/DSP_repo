@@ -9,17 +9,18 @@ import { listProducts } from '../actions/productActions'
 import axios from 'axios';
 
 
-function HomeScreen() {
+function HomeScreen({history}) {
   const dispatch = useDispatch()
   const productList = useSelector(state => state.productList)
   const { loading, error, products } = productList
   
+  let keyword = history.location.search
   useEffect(() => {
-    dispatch(listProducts())
+    dispatch(listProducts(keyword))
     
 
     
-  },[])
+  },[dispatch, keyword])
   
 
   return (
