@@ -28,8 +28,6 @@ export const listProducts = (keyword = '') => async (dispatch) => {
             type: PRODUCT_LIST_SUCCESS,
             payload: data
         })
-    
-    
     } catch (error) {
         dispatch({
             type: PRODUCT_LIST_FAIL,

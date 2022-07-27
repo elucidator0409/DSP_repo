@@ -9,6 +9,10 @@ import { listProductDetails, createProductReview } from '../actions/productActio
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
 
 
+const imageStyle = {
+    width: "100%" 
+  }
+
 function ProductScreen({ match, history }) {
     const [qty, setQty] = useState(1)
     const [rating, setRating] = useState(0)
@@ -37,7 +41,6 @@ function ProductScreen({ match, history }) {
         }
 
         dispatch(listProductDetails(match.params.id))
-
     
     },[dispatch, match, successProductReview])
 
@@ -67,13 +70,21 @@ function ProductScreen({ match, history }) {
                         <div>
                             <Row>
                                 <Col md={2}>
-                                    <Image src={product.image} alt={product.name} fluid />
+                                    <img src={'https://image.tmdb.org/t/p/original'+ product.poster_path}
+                                            style={imageStyle}
+                                              onError={( { currentTarget } ) => {
+                                                currentTarget.onerror = null; // prevents looping
+                                                currentTarget.src="https://demofree.sirv.com/nope-not-here.jpg"
+                                              }}
+                                    
+                                    alt={product.title} 
+                                    />
                                 </Col>
 
                                 <Col md={3}>
                                     <ListGroup variant="flush">
                                         <ListGroup.Item>
-                                            <h3>{product.name}</h3>
+                                            <h3>{product.title}</h3>
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
@@ -85,12 +96,10 @@ function ProductScreen({ match, history }) {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            Description: {product.description}
+                                            Description: {product.overview}
                                         </ListGroup.Item>
 
-                                        <ListGroup.Item>
-                                            Category: {product.category}
-                                        </ListGroup.Item>
+                                        
                                     </ListGroup>
                                 </Col>
 
@@ -110,12 +119,12 @@ function ProductScreen({ match, history }) {
                                                 <Row>
                                                     <Col>Status:</Col>
                                                     <Col>
-                                                        {product.countInStock >0 ? 'In Stock' : 'Out of stock'}
+                                                        {product.count_in_stock >0 ? 'In Stock' : 'Out of stock'}
                                                     </Col>
                                                 </Row>
                                             </ListGroup.Item>
 
-                                            {product.countInStock >0 && (
+                                            {product.count_in_stock >0 && (
                                                 <ListGroup.Item>
                                                     <Row>
                                                         <Col>Qty</Col>
@@ -126,7 +135,7 @@ function ProductScreen({ match, history }) {
                                                                 onChange={(e) => setQty(e.target.value)}
                                                             >
                                                                 {   
-                                                                    [...Array(product.countInStock).keys()].map((x) => (
+                                                                    [...Array(product.count_in_stock).keys()].map((x) => (
                                                                         <option key={x + 1} value={x + 1}>
                                                                             {x + 1 }
                                                                         </option>
@@ -212,19 +221,10 @@ function ProductScreen({ match, history }) {
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Col>
-
-
                             </Row>
-
-
                         </div>
-                    )   
-        
+                    )
             }
-
-            
-           
-
         </div>
     )
 }

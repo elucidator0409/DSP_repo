@@ -2,19 +2,31 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import Rating from './Rating'
 import { Link } from 'react-router-dom'
+import defaultImage from '../constants/no-image.png'
+
+const imageStyle = {
+  width: "100%" 
+}
 
 function Product({ product }) {
   return (
     <Card className="my-3 p-3 rounded">
-        <Link to={`/product/${product._id}`}>
-            <Card.Img src={product.image} />
+        <Link to={`/product/${product.id}`}>
+            <img
+            style={imageStyle}
+            alt="The representation of an angle"
+            onError={( { currentTarget } ) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src="https://demofree.sirv.com/nope-not-here.jpg"
+            }}
+            src={'https://image.tmdb.org/t/p/original'+ product.poster_path} />
         </Link>
 
         <Card.Body>
             
             <Card.Title as="div">
-                <Link  to={`/product/${product._id}`} >
-                    <strong>{product.name}</strong>
+                <Link  to={`/product/${product.id}`} >
+                    <strong>{product.title}</strong>
                 </Link>
             </Card.Title>
 
