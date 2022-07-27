@@ -6,13 +6,13 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from base.models import Product, Review
-from base.serializers import ProductSerializer
+from base.models import Movies, Review
+from base.serializers import MoviesSerializer
 
 
 
-from django.contrib.auth.hashers import make_password
-from rest_framework import status
+# from django.contrib.auth.hashers import make_password
+# from rest_framework import status
 
 
 @api_view(['GET'])
@@ -21,11 +21,10 @@ def getProducts(request):
     if query == None:
         query = ''
 
-
-    products = Product.objects.filter(name__icontains=query)
+    products = Movies.objects.filter(title__icontains=query)
 
     page= request.query_params.get('page')
-    paginator = Paginator(products,4)
+    paginator = Paginator(products,12)
 
     try:
         products = paginator.page(page)
@@ -39,20 +38,20 @@ def getProducts(request):
     
     page = int(page)
 
-    serializer = ProductSerializer(products, many=True)
+    serializer = MoviesSerializer(products, many=True)
     return Response({'products':serializer.data, 'page':page, 'pages': paginator.num_pages})
 
-@api_view(['GET'])
-def getTopProducts(request):
-    products = Product.objects.filter(rating__gte=4).order_by('-rating')[0:5]
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def getTopProducts(request):
+#     products = Product.objects.filter(rating__gte=4).order_by('-rating')[0:5]
+#     serializer = ProductSerializer(products, many=True)
+#     return Response(serializer.data)
 
 
 @api_view(['GET'])
 def getProduct(request, pk):
-    product = Product.objects.get(_id=pk)
-    serializer = ProductSerializer(product, many=False)
+    product = Movies.objects.get(id=pk)
+    serializer = MoviesSerializer(product, many=False)
         
     return Response(serializer.data)
 
@@ -60,7 +59,7 @@ def getProduct(request, pk):
 @permission_classes([IsAuthenticated])
 def createProductReview(request, pk):
     user = request.user
-    product = Product.objects.get(_id=pk)
+    product = Movies.objects.get(id=pk)
     data= request.data
 
     alreadyExists = product.review_set.filter(user=user).exists()

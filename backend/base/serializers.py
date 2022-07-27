@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Product, Order, OrderItem, ShippingAddress, Review
+from .models import Movies, Order, OrderItem, ShippingAddress, Review
 
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
@@ -44,11 +44,11 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     
 
-class ProductSerializer(serializers.ModelSerializer):
+class MoviesSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
-        model = Product
+        model = Movies
         fields = '__all__'
 
     def get_reviews(self, obj):
