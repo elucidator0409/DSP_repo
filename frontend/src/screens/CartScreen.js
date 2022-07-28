@@ -5,6 +5,11 @@ import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import  Message  from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
+
+const imageStyle = {
+    width: "60%" 
+  }
+
 function CartScreen({ match, location, history }) {
     const productID = match.params.id
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
@@ -40,11 +45,11 @@ function CartScreen({ match, location, history }) {
                         {cartItems.map(item => (
                             <ListGroup.Item key={item.product}>
                                 <Row>
-                                    <Col md={2}>
-                                        <Image src={item.image} alt={item.name} fluid rounded />
+                                    <Col md={3}>
+                                        <img src={'https://image.tmdb.org/t/p/original' +  item.image} alt={item.name} style={imageStyle}/>
                                     </Col>
                                     <Col md={2}>
-                                        <Link to={`/products/${item.product}`}>{item.name}</Link>
+                                        <Link to={`/product/${item.product}`}>{item.name}</Link>
                                     </Col>
 
                                     <Col md={2}>
@@ -60,7 +65,7 @@ function CartScreen({ match, location, history }) {
                                             onChange={(e) => dispatch(addToCart(item.product, e.target.value))}
                                         >
                                             {   
-                                                [...Array(item.countInStock).keys()].map((x) => (
+                                                [...Array(item.count_in_stock).keys()].map((x) => (
                                                     <option key={x + 1} value={x + 1}>
                                                         {x + 1 }
                                                     </option>

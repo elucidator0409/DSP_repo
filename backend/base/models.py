@@ -65,6 +65,7 @@ class Movies(models.Model):
     numReviews = models.IntegerField(null=True, blank=True, default=0)
     rating = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
 
+
     class Meta:
       db_table = 'movies'
 
