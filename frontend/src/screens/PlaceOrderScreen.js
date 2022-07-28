@@ -7,6 +7,10 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
+const imageStyle = {
+    width: "100%" 
+  }
+
 function PlaceOrderScreen({ history }) {
     const dispatch = useDispatch()
 
@@ -15,6 +19,7 @@ function PlaceOrderScreen({ history }) {
 
 
     const cart = useSelector(state => ({ ...state.cart }))
+    
 
     cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
     cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2)
@@ -90,7 +95,7 @@ function PlaceOrderScreen({ history }) {
                                             <ListGroup.Item key={index}>
                                                 <Row>
                                                     <Col md={1}>
-                                                        <Image src={item.image} alt={item.name} fluid rounded />
+                                                    <img src={'https://image.tmdb.org/t/p/original' +  item.image} alt={item.name} style={imageStyle}/>
                                                     </Col>
 
                                                     <Col>
