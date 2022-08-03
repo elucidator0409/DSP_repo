@@ -73,7 +73,7 @@ class Movies(models.Model):
         return str(self.id)
 
 class Review(models.Model):
-  movie = models.ForeignKey(Movies, on_delete=models.SET_NULL, null=True)
+  product = models.ForeignKey(Movies, on_delete=models.SET_NULL, null=True)
   user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
   name = models.CharField(max_length=200, null=True, blank=True)
   rating = models.IntegerField(null=True, blank=True, default=0)
@@ -108,7 +108,7 @@ class Order(models.Model):
       return str(self.createdAt)
 
 class OrderItem(models.Model):
-  movie = models.ForeignKey(Movies, on_delete=models.SET_NULL, null=True)
+  product = models.ForeignKey(Movies, on_delete=models.SET_NULL, null=True)
   order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
   name = models.CharField(max_length=200, null=True, blank=True)  
   qty = models.IntegerField(null=True, blank=True, default=0)

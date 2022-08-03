@@ -1,16 +1,18 @@
-import React from 'react'
-import { Card } from 'react-bootstrap'
-import Rating from './Rating'
-import { Link } from 'react-router-dom'
-import defaultImage from '../constants/no-image.png'
+import React from 'react';
+import { Card } from 'react-bootstrap';
+import Rating from './Rating';
+import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const imageStyle = {
   width: "100%" 
 }
 
 function Product({ product }) {
+  console.log(product)
+
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="my-3 p-3 rounded" bg="dark" text="white">
         <Link to={`/product/${product.id}`}>
             <img
             style={imageStyle}
@@ -25,20 +27,18 @@ function Product({ product }) {
         <Card.Body>
             
             <Card.Title as="div">
-                <Link  to={`/product/${product.id}`} >
+                <LinkContainer to={`/product/${product.id}`} >
                     <strong>{product.title}</strong>
-                </Link>
+                </LinkContainer>
             </Card.Title>
-
-            
 
             <Card.Text as="div" >
                 <div className="my-3">
-                        <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'} />
+                        <Rating value={product.popularity} text={`${product.numReviews} reviews`} color={'#f8e825'} />
                 </div>
             </Card.Text>
 
-            <Card.Text as="h3">
+            <Card.Text className="text-light" as="h3">
                 ${product.price}
             </Card.Text>
         </Card.Body>

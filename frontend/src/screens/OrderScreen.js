@@ -43,7 +43,7 @@ function OrderScreen({ match }) {
    
 
     useEffect(() => {
-        if(!order || successPay || order._id !== Number(orderId)){
+        if(!order || successPay || order.id !== Number(orderId)){
             dispatch({ type: ORDER_PAY_RESET })
             dispatch(getOrderDetails(orderId))
 
@@ -68,7 +68,7 @@ function OrderScreen({ match }) {
         <Message variant='danger'>{error}</Message>
     ) : (
         <div>
-            <h1>Order: {order._id}</h1>
+            <h1>Order: {order.id}</h1>
             <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>

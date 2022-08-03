@@ -48,23 +48,24 @@ function ProfileScreen({ history }) {
         }
     }, [dispatch, history, userInfo, user, success])
 
+  const submitHandler = (e) => {
+      e.preventDefault()
 
+      if(password !== confirmPassword) {
+          setMessage('Password do not match')
+      } else{
+          dispatch(updateUserProfile({
+              'id': user._id,
+              'name': name,
+              'email':email, 
+              'password': password
+          }))
+          setMessage('')
+      }
+  }
 
-    const submitHandler = (e) => {
-        e.preventDefault()
+  console.log(orders);
 
-        if(password !== confirmPassword) {
-            setMessage('Password do not match')
-        } else{
-            dispatch(updateUserProfile({
-                'id': user._id,
-                'name': name,
-                'email':email, 
-                'password': password
-            }))
-            setMessage('')
-        }
-    }
   return (
     <Row>
         <Col md={3}>
@@ -158,14 +159,14 @@ function ProfileScreen({ history }) {
                     <tbody>
                         {orders.map(order => (
                             <tr>
-                                <td>{order._id}</td>
+                                <td>{order.id}</td>
                                 <td>{order.createdAt.substring(0, 10)}</td>
                                 <td>${order.totalPrice}</td>
                                 <td>{order.isPaid ? order.paidAt : (
                                     <i className='fas fa-times' style={{ color: 'red'}}></i>
                                 )}</td>
                                 <td>
-                                    <LinkContainer to={`/order/${order._id}`}>
+                                    <LinkContainer to={`/order/${order.id}`}>
                                         <Button className='btn-sm'>Details</Button>
                                     </LinkContainer>
                                 </td>

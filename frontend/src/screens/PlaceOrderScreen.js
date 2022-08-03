@@ -38,7 +38,7 @@ function PlaceOrderScreen({ history }) {
         
         if (success) {
             
-            history.push(`/order/${order._id}`)
+            history.push(`/order/${order.id}`)
             dispatch({ type: ORDER_CREATE_RESET })
             
         }
@@ -95,7 +95,12 @@ function PlaceOrderScreen({ history }) {
                                             <ListGroup.Item key={index}>
                                                 <Row>
                                                     <Col md={1}>
-                                                    <img src={'https://image.tmdb.org/t/p/original' +  item.image} alt={item.name} style={imageStyle}/>
+                                                    <img 
+                                                    onError={( { currentTarget } ) => {
+                                                        currentTarget.onerror = null; // prevents looping
+                                                        currentTarget.src="https://demofree.sirv.com/nope-not-here.jpg"
+                                                        }}
+                                                    src={'https://image.tmdb.org/t/p/original' +  item.image} alt={item.name} style={imageStyle}/>
                                                     </Col>
 
                                                     <Col>

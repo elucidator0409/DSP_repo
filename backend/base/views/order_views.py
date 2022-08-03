@@ -43,7 +43,7 @@ def addOrderItems(request):
             postalCode=data['shippingAddress']['postalCode'],
             country=data['shippingAddress']['country'],
         )
-        print('https://image.tmdb.org/t/p/original' +  product.poster_path,)
+       
         # (3) Create order items adn set order to orderItem relationship
         for i in orderItems:
             product = Movies.objects.get(id=i['product'])

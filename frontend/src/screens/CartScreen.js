@@ -46,7 +46,12 @@ function CartScreen({ match, location, history }) {
                             <ListGroup.Item key={item.product}>
                                 <Row>
                                     <Col md={3}>
-                                        <img src={'https://image.tmdb.org/t/p/original' +  item.image} alt={item.name} style={imageStyle}/>
+                                        <img onError={( { currentTarget } ) => {
+                                            currentTarget.onerror = null; // prevents looping
+                                            currentTarget.src="https://demofree.sirv.com/nope-not-here.jpg"
+                                            }} 
+                                            
+                                            src={'https://image.tmdb.org/t/p/original' +  item.image} alt={item.name} style={imageStyle}/>
                                     </Col>
                                     <Col md={2}>
                                         <Link to={`/product/${item.product}`}>{item.name}</Link>

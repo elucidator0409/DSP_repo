@@ -18,10 +18,10 @@ function Header() {
 
   return (
     <header>
-        <Navbar bg="dark" variant="dark " expand="lg" collapseOnSelect>
+        <Navbar bg="dark" variant="dark" collapseOnSelect>
           <Container>
             <LinkContainer to='/'>
-              <Navbar.Brand href="/">MovieName</Navbar.Brand>
+              <Navbar.Brand>ELUmovie</Navbar.Brand>
             </LinkContainer>
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -38,14 +38,11 @@ function Header() {
                     <LinkContainer to='/profile'>
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
-
                     <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-
-
                   </NavDropdown>
                 ): (
                   <LinkContainer to='/login'>
-                    <Nav.Link ><i className="fas fa-user"></i> Login</Nav.Link>
+                    <Nav.Link><i className="fas fa-user"></i> Login</Nav.Link>
                   </LinkContainer>  
                 )}
                 

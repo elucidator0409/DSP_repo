@@ -1,10 +1,6 @@
 v# Movie recommendation website using content-based filtering with NLP and text embedding
 
-> This project is a result of the course ... done by Tran Quoc Khanh
-
-## Deployment link
-
-- ?
+> This project is a result of the course "Digital Systems Project" done by Tran Quoc Khanh
 
 ## Set up to run locally
 

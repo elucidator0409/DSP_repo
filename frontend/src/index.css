@@ -55,3 +55,7 @@ h3 {
     }
 }
 
+.navbar {
+  text-transform: none !important;
+}
+
