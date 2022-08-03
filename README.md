@@ -23,7 +23,7 @@ source testproject/Scripts/activate
 
 4. Use `git bash`
 
-### Set up virtualenv on my laptop (Windows)
+### Set up virtualenv on my laptop (Windows) (use powershell)
 1. Use pip : pip install virtualenv
 2. Create folder myenv: virtualenv myenv
 3. Go into env : myenv\Scripts\activate (only for backend)
