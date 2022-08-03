@@ -23,6 +23,12 @@ source testproject/Scripts/activate
 
 4. Use `git bash`
 
+### Set up virtualenv on my laptop (Windows)
+1. Use pip : pip install virtualenv
+2. Create folder myenv: virtualenv myenv
+3. Go into env : myenv\Scripts\activate (only for backend)
+4. cd to backend folder 
+
 ### Set up the project
 
 > Start the Django backend first before running the frontend
